@@ -1,4 +1,11 @@
 const knightMoves = (start, target) => {
+  if (
+    typeof (start, target) !== "array" &&
+    start.length !== 2 &&
+    target.length !== 2
+  ) {
+    throw new Error("Please enter two co-ordinates as arrays");
+  }
   nextMoves = new Map();
 
   const addNode = (value, start) => {
@@ -38,13 +45,8 @@ const knightMoves = (start, target) => {
   const stepGrab = (start, target) => {
     let arr = [];
     current = [nextMoves.get(target.toString())[0]];
-    console.log(current);
-    console.log(start);
     arr.push(current);
-    console.log(arr);
     while (current.toString() !== start.toString()) {
-      console.log(arr);
-      console.log(`Current: ${current}`);
       arr.push(nextMoves.get(current.toString())[0]);
       current = nextMoves.get(current.toString())[0];
     }
@@ -56,7 +58,6 @@ const knightMoves = (start, target) => {
   const bfs = (start, target) => {
     let queue = start;
     while (!nextMoves.has(target.toString())) {
-      console.log("while, loop");
       let current = queue.shift();
       let nextMove = nextMoves.get(current.toString());
       nextMove[1].forEach((node) => {

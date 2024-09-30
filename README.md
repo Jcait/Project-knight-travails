@@ -6,6 +6,7 @@ This is a project that involves finding the shortest amount of moves a knight pi
 
 - Refactor Code
 - Look to make more efficiant
+- Incorporate ways to shows multiple shortest route
 
 ## Starting out
 
@@ -151,3 +152,7 @@ const stepGrab = (start, target) => {
 ```
 
 The recurise method returns the path backwards along with the initial value at the end, So it's returned in order as an array which is then added to the returned string.
+
+The Code returns the following after testing
+`knightMoves([7,0], [0,0])` returns `A knight can move in 5 moves, starting from [7,0] to [0,0], using the shortest path [7,0][5,1][3,0][4,2][2,1][0,0]`
+`knightMoves([1,2], [5,3])` returns ` A knight can move in 3 moves, starting from [1,2] to [5,3], using the shortest path [1,2][3,3][4,5][5,3]`
