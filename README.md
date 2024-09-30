@@ -1,18 +1,18 @@
 # Project-knight-travails
 
-This is a project that involves finding the shortest amount of moves a knight piece in chess can make to reach it's destination, The Full can be found on [The Odin Project](https://www.theodinproject.com/lessons/javascript-knights-travails)
+This is a project that involves finding the shortest amount of moves a knight piece in chess can make to reach it's destination. The full can be found on [The Odin Project](https://www.theodinproject.com/lessons/javascript-knights-travails)
 
 ## ToDo
 
 - Refactor Code
-- Look to make more efficiant
-- Incorporate ways to shows multiple shortest route
+- Look to make more efficient
+- Incorporate ways to show multiple shortest routes
 
 ## Starting out
 
-This project took the better part of a Week to do and honestly at one point I almost considered skipping it but that wouldn't accomplish anything and this project has been education and enjoyable.
+This project took the better part of a week to do, and honestly, at one point I almost considered skipping it but that wouldn't accomplish anything, and this project has been educational and enjoyable.
 
-As the project lists we want to create a function to find the shortest route from the start to the end.
+As the project lists, we want to create a function to find the shortest route from the start to the end.
 
 ```js
 const knightMoves = (start, target) => {
@@ -20,9 +20,9 @@ const knightMoves = (start, target) => {
 };
 ```
 
-The brief mentions using Graphs which at the time the concept seemed completely alien, Researching Graphs, the `Map()` Object came up a so lets go with that.
+The brief mentions using graphs, which at the time the concept seemed completely alien. Researching graphs, the `Map()` object came up, so lets go with that.
 
-As well as having the map I want a function that adds to the map. (The Value is convered to a string because it's easier to compare two strings than it is two arrays. )
+As well as having the map, I want a function that adds to the map. (The value is convered to a string because it's easier to compare two strings than it is two arrays.)
 
 ```js
 const knightMoves = (start, target) => {
@@ -33,9 +33,9 @@ const knightMoves = (start, target) => {
 };
 ```
 
-Values can now be added to the Map but we need to determine what values can be added. The Knight has a total of eight moves from it's point that it can use. However a chessboard is 8x8 so if any of the values go above 8 or below 0 said moves would be illegal.
+Values can now be added to the map, but we need to determine what values can be added. The Knight has a total of eight moves from it's point that it can use. However, a chessboard is 8x8, so if any of the values go above 8 or below 0, said moves would be illegal.
 
-(There is probably a more efficient way to determine the next moves eather than push each new move individually but since that's not the focus of the project this was done for speed.)
+(There is probably a more efficient way to determine the next moves together than push each new move individually, but since that's not the focus of the project, this was done for speed.)
 
 ```js
 const possibleMoves = (start) => {
@@ -54,7 +54,7 @@ const possibleMoves = (start) => {
 };
 ```
 
-With new each value found, to generate more nodes if the answer isn't found I want to add those Functions possible moves to the value.
+With each new  value found, to generate more nodes if the answer isn't found, I want to add those functions possible moves to the value.
 
 ```js
 // Start must be passed in with .toString()
@@ -65,7 +65,7 @@ const addEdges = (start, connect) => {
 
 ### Creating first values
 
-We run the following in the function to get our first set of values. It iterates through the array of returned by possible moves, adding each of them to the `nextMoves` map and adding their possible moves to the Key
+We run the following function to get our first set of values. It iterates through the array of returned by possible moves, adding each of them to the `nextMoves` map and adding their possible moves to the Key
 
 ```js
 possibleMoves(start).forEach((node) => {
@@ -76,9 +76,9 @@ possibleMoves(start).forEach((node) => {
 
 ### Searching for the route.
 
-To Search for the shortest route, we're going to go through the values of possible moves created after the initial function,
+To search for the shortest route, we're going to go through the values of possible moves created after the initial function,
 
-To make life easier we push the array of values to a new variable to track it and we create a new Set to hold values that have already been passed.
+To make life easier, we push the array of values to a new variable to track it, and we create a new set to hold values that have already been passed.
 
 ```js
 const bfs = (start, target) => {
@@ -87,9 +87,9 @@ const bfs = (start, target) => {
 };
 ```
 
-The gist is we want to keep generating new nodes untill the target is found,
+The gist is we want to keep generating new nodes until the target is found,
 
-We add the array to it's own variable `queue` and untill our target is found in the `Map()` the first value in the queue, if the value is already in the queue it skips it and adds it's possible moves to the end of the queue but not before removing the first value. the process continues untill the target is found.
+We add the array to it's own variable `queue` and until our target is found in the `Map()` the first value in the queue, if the value is already in the queue it skips it and adds it's possible moves to the end of the queue but not before removing the first value. The process continues until the target is found.
 
 ```js
 const bfs = (start, target) => {
@@ -110,7 +110,7 @@ const bfs = (start, target) => {
 };
 ```
 
-With the Target found the easiest way to find the path to it was to work backwards. Ammending the Map key to also inlude the the value that generated the key. with this value we can use recursion to work backwards and form a path.
+With the Target found, the easiest way to find the path to it was to work backwards. Amending the Map key to also inlude the value that generated the key. With this value, we can use recursion to work backwards and form a path.
 
 ```js
 const addNode = (value, start) => {
@@ -119,7 +119,7 @@ const addNode = (value, start) => {
 };
 ```
 
-With each Key having the value it came from we can use recursion to create the printed path
+With each key having the value it came from, we can use recursion to create the printed path.
 
 ```js
 const buildPath = (start, target) => {
@@ -151,8 +151,8 @@ const stepGrab = (start, target) => {
 };
 ```
 
-The recurise method returns the path backwards along with the initial value at the end, So it's returned in order as an array which is then added to the returned string.
+The recurise method returns the path backwards along with the initial value at the end, so it's returned in order as an array, which is then added to the returned string.
 
-The Code returns the following after testing
+The code returns the following after testing
 `knightMoves([7,0], [0,0])` returns `A knight can move in 5 moves, starting from [7,0] to [0,0], using the shortest path [7,0][5,1][3,0][4,2][2,1][0,0]`
 `knightMoves([1,2], [5,3])` returns ` A knight can move in 3 moves, starting from [1,2] to [5,3], using the shortest path [1,2][3,3][4,5][5,3]`
